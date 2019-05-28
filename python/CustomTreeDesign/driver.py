@@ -1,0 +1,21 @@
+from node import Node
+if __name__ == "__main__":
+    p   = Node("1 200 P")
+    c1  = Node("2 100 C1")
+    c2  = Node("3 100 C2")
+    c11 = Node("4 100 c11")
+    c111 = Node("5 100 c111")
+    c112 = Node("6 100 c112")
+    c12 = Node("7 100 c12")
+    c13 = Node("8 100 c13")
+    c21 = Node("9 100 c21")
+    c22 = Node("10 100 c22")
+
+    p.addNodesToTree([c1, c2])
+    c11.addNodesToTree([c111, c112])
+    c1.addNodesToTree([c11, c12, c13])
+    c2.addNodesToTree([c21, c22])
+    # p.printTreeFromNode(" ")
+    # p.checkNodeDiscount(6, 99)
+    p.searchNodeInTreeOrSubTree(2)
+    # p.printTreeFromNode(" ")

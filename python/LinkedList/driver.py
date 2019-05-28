@@ -1,0 +1,17 @@
+from node import Node
+if __name__ == "__main__":
+    head = Node(None)
+    first = Node("First")
+    second = Node("Second")
+    third = Node("Third")
+    fourth = Node("Fourth")
+    zeroth = Node("Zeroth")
+    head.insertNodeInEnd(first)
+    head.insertNodeInEnd(second)
+    head.insertNodeInEnd(third)
+    head.insertNodeInEnd(fourth)
+    head.insertAfterNode("Fifth",zeroth)
+    # print(first.prev)
+    # print(second.next)
+    head.traverseTheList()
+    # print(first.searchNode("Fourth"))
