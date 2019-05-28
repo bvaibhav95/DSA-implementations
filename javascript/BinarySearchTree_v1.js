@@ -102,6 +102,6 @@ myBST.insert(50);
 myBST.insert(60);
 myBST.insert(80);
 
-myBST.breadthFirstTraversal();
+// myBST.breadthFirstTraversal();
 // console.log(myBST.getMaxValueRecursively());
 // myBST.depthFirstTraversal("pre-order");
