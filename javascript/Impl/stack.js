@@ -78,3 +78,165 @@ class Stack2 {
  * 3) findMiddle() which will return middle element of the stack.
  * 4) deleteMiddle() which will delete the middle element.
  */
+class Node {
+  constructor(value, next, prev) {
+    this.value = value;
+    this.next = next;
+    this.prev = prev;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.count = 0;
+    this.mid = null;
+  }
+  setMidNodeOnHeadAdd(node, prevMid) {
+    if (this.count % 2 !== 0) {
+      this.mid = prevMid.prev;
+    } else {
+      if (node.next) {
+        this.mid = prevMid;
+      } else {
+        this.mid = node;
+      }
+    }
+  }
+  setMidNodeOnTailAdd(node, prevMid) {
+    if (this.count % 2 === 0) {
+      this.mid = prevMid.next;
+    } else {
+      if (node.prev) {
+        this.mid = prevMid;
+      } else {
+        this.mid = node;
+      }
+    }
+  }
+  setMidNodeOnHeadRemove(prevMid) {
+    if (this.count % 2 === 0) {
+      this.mid = prevMid.next;
+    }
+  }
+  setMidNodeOnTailRemove(prevMid) {
+    if (this.count % 2 !== 0) {
+      this.mid = prevMid.prev;
+    }
+  }
+  addToHead(value) {
+    let newNode = new Node(value, this.head, null);
+    this.count++;
+    if (!this.head) {
+      this.tail = newNode;
+    } else {
+      this.head.prev = newNode;
+    }
+    this.head = newNode;
+    this.setMidNodeOnHeadAdd(newNode, this.mid);
+  }
+  addToTail(value) {
+    this.count++;
+    let newNode = new Node(value, null, this.tail);
+    if (!this.tail) {
+      this.head = newNode;
+    } else {
+      this.tail.next = newNode;
+    }
+    this.tail = newNode;
+    this.setMidNodeOnTailAdd(newNode, this.mid);
+  }
+  removeHead() {
+    this.count--;
+    if (!this.head) {
+      return null;
+    }
+    let headValue = this.head.value;
+    this.head = this.head.next;
+    if (this.head) {
+      this.head.prev = null;
+    } else {
+      this.tail = null;
+    }
+    this.setMidNodeOnHeadRemove(this.mid);
+    return headValue;
+  }
+  removeTail() {
+    this.count--;
+    if (!this.tail) {
+      return null;
+    }
+    let tailValue = this.tail.value;
+    this.tail = this.tail.prev;
+    if (this.tail) {
+      this.tail.next = null;
+    } else {
+      this.head = null;
+    }
+    this.setMidNodeOnTailRemove(this.mid);
+    return tailValue;
+  }
+  search(key) {
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value === key) {
+        return true;
+      }
+      currentNode = currentNode.next;
+    }
+    return false;
+  }
+  indexOf(key) {
+    let indices = [];
+    let counter = 0;
+    let currentNode = this.head;
+    while (currentNode) {
+      if (currentNode.value === key) {
+        indices.push(counter);
+      }
+      currentNode = currentNode.next;
+      counter++;
+    }
+    return indices;
+  }
+  remove(key) {
+    this.count--;
+    if (this.head) {
+      let flag = false;
+      let currentNode = this.head;
+      while (currentNode) {
+        if (currentNode.value === key) {
+          flag = true;
+          let thisNode = currentNode;
+          if (thisNode === this.head) {
+            thisNode.next.prev = null;
+            this.head = thisNode.next;
+          } else if (thisNode === this.tail) {
+            thisNode.prev.next = null;
+            this.tail = thisNode.prev;
+          } else {
+            thisNode.next.prev = thisNode.prev;
+            thisNode.prev.next = thisNode.next;
+          }
+        }
+        currentNode = currentNode.next;
+      }
+      if (flag) return key;
+      else null;
+    } else return null;
+  }
+}
+
+let speccialStack = new LinkedList();
+speccialStack.addToTail(1);
+speccialStack.addToTail(2);
+speccialStack.addToTail(3);
+speccialStack.addToHead(4);
+speccialStack.addToHead(6);
+speccialStack.removeHead();
+speccialStack.removeTail();
+speccialStack.removeHead();
+// speccialStack.addToHead(8);
+
+console.log(speccialStack.mid);
