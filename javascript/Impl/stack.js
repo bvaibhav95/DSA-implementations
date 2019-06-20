@@ -228,15 +228,66 @@ class LinkedList {
   }
 }
 
-let speccialStack = new LinkedList();
-speccialStack.addToTail(1);
-speccialStack.addToTail(2);
-speccialStack.addToTail(3);
-speccialStack.addToHead(4);
-speccialStack.addToHead(6);
-speccialStack.removeHead();
-speccialStack.removeTail();
-speccialStack.removeHead();
+// let speccialStack = new LinkedList();
+// speccialStack.addToTail(1);
+// speccialStack.addToTail(2);
+// speccialStack.addToTail(3);
+// speccialStack.addToHead(4);
+// speccialStack.addToHead(6);
+// speccialStack.removeHead();
+// speccialStack.removeTail();
+// speccialStack.removeHead();
 // speccialStack.addToHead(8);
+// console.log(speccialStack.mid);
 
-console.log(speccialStack.mid);
+//Impl : 3
+/*
+  Reverse stack using recursion ?
+  1. Write a program to reverse a stack using recursion. You are not allowed to use loop constructs like while, for..etc, and you can only use the following ADT functions on Stack S:
+    isEmpty(S)
+    push(S)
+    pop(S)
+    Assumption - (OldStack will get empty after reversal)
+*/
+class Stack {
+  constructor() {
+    this.data = [];
+  }
+  push(value) {
+    this.data.push(value);
+    return value;
+  }
+  pop() {
+    return this.data.length ? this.data.pop() : null;
+  }
+  isEmpty() {
+    return this.data.length ? false : true;
+  }
+}
+
+let oldStack = new Stack();
+let newStack = new Stack();
+oldStack.push(1);
+oldStack.push(2);
+oldStack.push(3);
+oldStack.pop();
+consolecs.log(oldStack.data);
+
+function reverseStackRecursively(oldStack, newStack) {
+  if (oldStack.isEmpty()) {
+    console.log(newStack.data);
+    return newStack;
+  } else {
+    newStack.push(oldStack.pop());
+    reverseStackRecursively(oldStack, newStack);
+  }
+}
+reverseStackRecursively(oldStack, newStack);
+// let newStack = new Stack();
+// console.log(newStack.isEmpty());
+// console.log(newStack.pop());
+// console.log(newStack.pop());
+// console.log(newStack.pop());
+// console.log(newStack.isEmpty());
+// console.log(newStack.pop());
+// console.log(newStack.isEmpty());
