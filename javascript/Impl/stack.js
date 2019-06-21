@@ -270,8 +270,9 @@ let newStack = new Stack();
 oldStack.push(1);
 oldStack.push(2);
 oldStack.push(3);
-oldStack.pop();
-consolecs.log(oldStack.data);
+oldStack.push(4);
+// oldStack.pop();
+console.log(oldStack);
 
 function reverseStackRecursively(oldStack, newStack) {
   if (oldStack.isEmpty()) {
@@ -282,7 +283,28 @@ function reverseStackRecursively(oldStack, newStack) {
     reverseStackRecursively(oldStack, newStack);
   }
 }
-reverseStackRecursively(oldStack, newStack);
+
+function insertAtTheBotttom(stack, poppedItem) {
+  console.log(stack, "in");
+  if (stack.isEmpty()) {
+    stack.push(poppedItem);
+  } else {
+    let temp = stack.pop();
+    insertAtTheBotttom(stack, poppedItem);
+    stack.push(temp);
+  }
+}
+
+function reverseStackRecursivelyV1(stack) {
+  console.log(stack, "rec");
+  if (!stack.isEmpty()) {
+    let poppedItem = stack.pop();
+    reverseStackRecursivelyV1(stack);
+    insertAtTheBotttom(stack, poppedItem);
+  }
+}
+reverseStackRecursivelyV1(oldStack);
+console.log(oldStack);
 // let newStack = new Stack();
 // console.log(newStack.isEmpty());
 // console.log(newStack.pop());
