@@ -19,20 +19,20 @@ class BinarySearchTree {
       }
     }
   }
-  search(key) {
+  search(value) {
     if (value === this.value) {
       return this.value;
     } else if (value < this.value) {
       if (!this.left) {
         return null;
       } else {
-        return this.left.search(key);
+        return this.left.search(value);
       }
     } else {
       if (!this.right) {
         return null;
       } else {
-        return this.right.search(key);
+        return this.right.search(value);
       }
     }
   }
@@ -92,16 +92,37 @@ class BinarySearchTree {
       return this.right.getMaxValueRecursively();
     }
   }
+  delete(value) {
+    if (this.value === value) {
+      //delete the node
+      if (!this.left && !this.right) {
+        delete this;
+      } else if (this.left || this.right) {
+      } else {
+      }
+      return value;
+    } else if (this.value > value) {
+      if (!this.left) {
+        return null;
+      }
+      return this.left.delete(value);
+    } else {
+      if (!this.right) {
+        return null;
+      }
+      return this.right.delete(value);
+    }
+  }
 }
 
-let myBST = new BinarySearchTree(50);
-myBST.insert(40);
-myBST.insert(10);
-myBST.insert(20);
-myBST.insert(50);
-myBST.insert(60);
-myBST.insert(80);
-
+let myBST = new BinarySearchTree(3);
+// myBST.insert(3);
+myBST.insert(2);
+myBST.insert(1);
+myBST.insert(4);
+myBST.insert(5);
+console.log(myBST.delete(1), "......");
+myBST.depthFirstTraversal("in-order");
 // myBST.breadthFirstTraversal();
 // console.log(myBST.getMaxValueRecursively());
 // myBST.depthFirstTraversal("pre-order");

@@ -10,6 +10,7 @@ class LinkedList {
   constructor() {
     this.head = null;
     this.tail = null;
+    this.length = 0;
   }
   addToHead(value) {
     // please watch the steps of each line
@@ -26,6 +27,7 @@ class LinkedList {
       this.head.prev = newNode;
     }
     this.head = newNode;
+    this.length++;
   }
   addToTail(value) {
     let newNode = new Node(value, null, this.tail);
@@ -35,6 +37,7 @@ class LinkedList {
       this.tail.next = newNode;
     }
     this.tail = newNode;
+    this.length++;
   }
   removeHead() {
     if (!this.head) {
@@ -47,6 +50,7 @@ class LinkedList {
     } else {
       this.tail = null;
     }
+    this.length--;
     return headValue;
   }
   removeTail() {
@@ -60,6 +64,7 @@ class LinkedList {
     } else {
       this.head = null;
     }
+    this.length--;
     return tailValue;
   }
   search(key) {
@@ -109,14 +114,35 @@ class LinkedList {
       if (flag) return key;
       else null;
     } else return null;
+    this.length--;
+  }
+  rotateBy(n) {
+    let currentNode = this.head;
+    if (this.length - n > 0) {
+      for (let i = 1; i < this.length - n; i++) {
+        currentNode = currentNode.next;
+      }
+      let oldTailNode = this.tail;
+      oldTailNode.next = this.head;
+      let newTailNode = currentNode;
+      let newHeadNode = currentNode.next;
+      newTailNode.next = null;
+      newHeadNode.prev = null;
+      this.tail = newTailNode;
+      this.head = newHeadNode;
+    } else if (this.length - n < 0) {
+      console.log("Cannot rotate list");
+    }
   }
 }
 
 let myLinkedList = new LinkedList();
-myLinkedList.addToTail(123);
-myLinkedList.addToTail(19);
-myLinkedList.addToTail(123);
-myLinkedList.addToTail(124);
-myLinkedList.addToTail(123);
-console.log(myLinkedList.remove(125));
+myLinkedList.addToTail(1);
+myLinkedList.addToTail(2);
+myLinkedList.addToTail(3);
+myLinkedList.addToTail(4);
+myLinkedList.addToTail(5);
+myLinkedList.addToTail(6);
+// console.log(myLinkedList.remove(125));
+myLinkedList.rotateBy(6);
 console.log(myLinkedList);
