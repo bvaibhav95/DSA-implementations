@@ -97,12 +97,12 @@ class BinarySearchTree {
     while (queue.length) {
       let currentNode = queue.shift();
       if (currentNode.value === value) {
-        if(!currentNode.left && !currentNode.right){
-          delete currentNode;
-        }else if(currentNode.left || currentNode.right){
-
-        }else{
-
+        if (!currentNode.left && !currentNode.right) {
+          console.log(currentNode);
+          currentNode = null;
+          return currentNode;
+        } else if (currentNode.left || currentNode.right) {
+        } else {
         }
       }
       if (currentNode.left) queue.push(currentNode.left);
