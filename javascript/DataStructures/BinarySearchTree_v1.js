@@ -93,36 +93,33 @@ class BinarySearchTree {
     }
   }
   delete(value) {
-    if (this.value === value) {
-      //delete the node
-      if (!this.left && !this.right) {
-        delete this;
-      } else if (this.left || this.right) {
-      } else {
+    let queue = [this];
+    while (queue.length) {
+      let currentNode = queue.shift();
+      if (currentNode.value === value) {
+        if(!currentNode.left && !currentNode.right){
+          delete currentNode;
+        }else if(currentNode.left || currentNode.right){
+
+        }else{
+
+        }
       }
-      return value;
-    } else if (this.value > value) {
-      if (!this.left) {
-        return null;
-      }
-      return this.left.delete(value);
-    } else {
-      if (!this.right) {
-        return null;
-      }
-      return this.right.delete(value);
+      if (currentNode.left) queue.push(currentNode.left);
+      if (currentNode.right) queue.push(currentNode.right);
     }
+    return `Value => ${value} not found`;
   }
 }
 
 let myBST = new BinarySearchTree(3);
-// myBST.insert(3);
 myBST.insert(2);
 myBST.insert(1);
 myBST.insert(4);
 myBST.insert(5);
-console.log(myBST.delete(1), "......");
-myBST.depthFirstTraversal("in-order");
+console.log(myBST.delete(5));
+console.log(myBST);
+// myBST.depthFirstTraversal("in-order");
 // myBST.breadthFirstTraversal();
 // console.log(myBST.getMaxValueRecursively());
 // myBST.depthFirstTraversal("pre-order");
