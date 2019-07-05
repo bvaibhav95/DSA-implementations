@@ -134,6 +134,19 @@ class LinkedList {
       console.log("Cannot rotate list");
     }
   }
+  /**
+   * Even no of nodes - last of first half
+   * Odd no of nodes  - exact middle
+   */
+  findMiddle() {
+    let slow = this.head;
+    let fast = this.head;
+    while (fast.next && fast.next.next) {
+      slow = slow.next;
+      fast = fast.next.next;
+    }
+    return slow.value;
+  }
 }
 
 let myLinkedList = new LinkedList();
@@ -143,6 +156,7 @@ myLinkedList.addToTail(3);
 myLinkedList.addToTail(4);
 myLinkedList.addToTail(5);
 myLinkedList.addToTail(6);
+myLinkedList.addToTail(7);
 // console.log(myLinkedList.remove(125));
-myLinkedList.rotateBy(6);
-console.log(myLinkedList);
+// myLinkedList.rotateBy(6);
+console.log(myLinkedList.findMiddle());

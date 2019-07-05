@@ -6,7 +6,7 @@ class Node {
   }
 }
 
-class BinartSearchTree {
+class BinarySearchTree {
   constructor(root) {
     this.root = null;
   }
@@ -14,9 +14,9 @@ class BinartSearchTree {
     let newNode = new Node(value);
     if (!this.root) {
       this.root = newNode;
-      return;
+      return value;
     } else {
-      this.insertNode(this.root, newNode);
+      return this.insertNode(this.root, newNode);
     }
   }
   insertNode(root, newNode) {
@@ -37,13 +37,63 @@ class BinartSearchTree {
       }
     }
   }
-  remove(value) {}
+  dfsSearch(value) {
+    if (!this.root) {
+      return null;
+    } else {
+      return this.search(this.root, value);
+    }
+  }
+  search(node, value) {
+    let currentNode = node;
+    if (currentNode.value === value) {
+      return currentNode.value;
+    } else if (value > currentNode.value) {
+      return this.search(currentNode.right, value);
+    } else {
+      return this.search(currentNode.left, value);
+    }
+  }
+  bfsSearch(value) {
+    let queue = [this.root];
+    while (queue.length !== 0) {
+      let popped = queue.pop();
+      if (popped.data === value) {
+        return value;
+      }
+      if (popped.left) {
+        queue.push(popped.left);
+      }
+      if (popped.right) {
+        queue.push(popped.right);
+      }
+    }
+    return null;
+  }
+  //Incomplete
+  remove(value) {
+    if (this.root) {
+      return null;
+    } else {
+      this.removeNode(this.root, value);
+    }
+  }
+  removeNode(node, value) {
+    if (!node) {
+      return null;
+    } else if (node.data > value) {
+      return this.removeNode(node.left, value);
+    } else if (node.data < value) {
+      return this.removeNode(node.right, value);
+    } else {
+    }
+  }
 }
 
-let myBinarySearchTree = new BinartSearchTree();
+let myBinarySearchTree = new BinarySearchTree();
 console.log(myBinarySearchTree.insert(3));
 console.log(myBinarySearchTree.insert(1));
 console.log(myBinarySearchTree.insert(5));
 console.log(myBinarySearchTree.insert(4));
 console.log(myBinarySearchTree.insert(6));
-console.log(myBinarySearchTree.root.right.right);
+console.log(myBinarySearchTree.bfsSearch(5));
