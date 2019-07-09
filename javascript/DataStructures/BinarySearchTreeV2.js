@@ -71,6 +71,7 @@ class BinarySearchTree {
     return null;
   }
   //Incomplete
+  //Ref - https://www.geeksforgeeks.org/implementation-binary-search-tree-javascript/
   remove(value) {
     if (this.root) {
       return null;
