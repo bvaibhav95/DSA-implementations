@@ -1,0 +1,17 @@
+Problem solving patterns
+
+1. frequency counter algorithm
+--> checking anagrams
+--> check if 2nd array contains 1st array's elements squared i.e [1,2,3] => [1,4,9]
+
+2. Two pointer / Multi pointer algorithm
+--> firstPairWithSumZeroGivenArrayIsSorted([-3, -1, 0, 1, 2, 3]) => [-3, 3]
+
+3. Count unique values algorithm
+--> countUniqueValuesInSortedArray([-3, -1, 0, 1, 2, 3]) => [-3, 3]
+
+4. Sliding window algorithm
+--> max subArray with sum n
+
+5. Divide & Conquer algorithm
+--> divide the data into subsets and solve for each subset
